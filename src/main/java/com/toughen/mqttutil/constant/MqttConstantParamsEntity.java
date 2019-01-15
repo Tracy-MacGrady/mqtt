@@ -8,8 +8,8 @@ public class MqttConstantParamsEntity {
     private String mqttBroker;
     private String mqttTopic;
     private String mqttGroupid;
-    private String mqttAccesskey;
-    private String mqttSecretkey;
+    private String username;
+    private String password;
 
     public String getMqttBroker() {
         return mqttBroker;
@@ -35,19 +35,19 @@ public class MqttConstantParamsEntity {
         this.mqttGroupid = mqttGroupid;
     }
 
-    public String getMqttAccesskey() {
-        return mqttAccesskey;
+    public String getUsername() {
+        return username;
     }
 
-    public void setMqttAccesskey(String mqttAccesskey) {
-        this.mqttAccesskey = mqttAccesskey;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getMqttSecretkey() {
-        return mqttSecretkey;
+    public String getPassword() {
+        return password;
     }
 
-    public void setMqttSecretkey(String mqttSecretkey) {
-        this.mqttSecretkey = mqttSecretkey;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

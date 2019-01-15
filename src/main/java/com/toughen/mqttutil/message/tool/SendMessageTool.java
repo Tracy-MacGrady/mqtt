@@ -33,10 +33,10 @@ public class SendMessageTool {
         return instance;
     }
 
-    public void sendToTopic(Context context, final String messageValue, String... secondTopics) {
+    public void sendToTopic(Context context, final String messageValue, int qos, String... secondTopics) {
         try {
             MqttMessage message = new MqttMessage(messageValue.getBytes());
-            message.setQos(2);
+            message.setQos(qos);
             Log.e("sendToTopic", " pushed at " + new Date() + " " + messageValue);
             /**
              *消息发送到某个主题Topic，所有订阅这个Topic的设备都能收到这个消息。
@@ -55,17 +55,21 @@ public class SendMessageTool {
     }
 
 
-    public void sendToClient(Context context, String messageValue, String clientId) throws MqttException {
-        String consumerClientId = MqttConstant.MQTT_GROUPID + "@@@ClientID_" + clientId;
-        MqttMessage message = new MqttMessage(messageValue.getBytes());
-        message.setQos(2);
-        Log.e("sendToClient", " pushed at " + new Date() + " " + messageValue);
-        /**
-         * 如果发送P2P消息，二级Topic必须是“p2p”,三级topic是目标的ClientID
-         * 此处设置的三级topic需要是接收方的ClientID
-         */
-        String topic = MqttConstant.MQTT_TOPIC + "/p2p/" + consumerClientId;
-        msgPublish(context, messageValue, message, topic);
+    public void sendToClient(Context context, String messageValue, String clientId, int qos) {
+        try {
+            String consumerClientId = MqttConstant.MQTT_GROUPID + "@@@ClientID_" + clientId;
+            MqttMessage message = new MqttMessage(messageValue.getBytes());
+            message.setQos(qos);
+            Log.e("sendToClient", " pushed at " + new Date() + " " + messageValue);
+            /**
+             * 如果发送P2P消息，二级Topic必须是“p2p”,三级topic是目标的ClientID
+             * 此处设置的三级topic需要是接收方的ClientID
+             */
+            String topic = MqttConstant.MQTT_TOPIC + "/p2p/" + consumerClientId;
+            msgPublish(context, messageValue, message, topic);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
     }
 
     private void msgPublish(Context context, String messageValue, MqttMessage message, String topic) throws MqttException {

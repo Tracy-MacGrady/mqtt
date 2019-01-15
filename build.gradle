@@ -25,7 +25,7 @@ dependencies {
     implementation 'com.android.support:support-v4:27.+'
 
     //mqtt相关
-    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
+    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.1'
     //    compile 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
     implementation 'commons-codec:commons-codec:1.5'
     //友盟统计
